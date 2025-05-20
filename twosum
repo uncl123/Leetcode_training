@@ -20,7 +20,10 @@ method 2:
 class Solution: hashtable
     def twoSum(self,num:List[int],target:int) ->List
       hashtable = dict() #初始化一个空的哈希表（字典），用来记录我们已经遍历过的数字及其索引。
-      for i,num in enumerate(nums):   #用 enumerate 同时遍历索引 i 和当前数字 num。
+      for i,num in enumerate(nums):   #用 enumerate 同时遍历索引 i 和当前数字 num。这个代码相当于如下
+                                        #for i in range(len(nums)):
+                                        #num = nums[i]
+                                        #...
           if target - num in hashtable:
                 return [hashtable[target-num],i]
           hashtable [nums[i]] =i #如果没找到，就把当前数字和它的索引记录到哈希表中，供后面的数字查找
