@@ -1,0 +1,16 @@
+#Python3# sumup
+
+#给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。
+#输入：nums = [2,7,11,15], target = 9
+#输出：[0,1]
+#解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    # 类中定义方法时，第一个参数必须是 self，代表当前这个类的实例对象
+        n = len(nums)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if nums[i] + nums[j] == target:
+                    return [i, j]
+        return []
