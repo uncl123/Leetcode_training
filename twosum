@@ -5,7 +5,8 @@
 #输出：[0,1]
 #解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 
 
-class Solution:
+method 1:
+class Solution: 暴力枚举
     def twoSum(self, nums: List[int], target: int) -> List[int]:
     # 类中定义方法时，第一个参数必须是 self，代表当前这个类的实例对象
         n = len(nums)
@@ -14,3 +15,20 @@ class Solution:
                 if nums[i] + nums[j] == target:
                     return [i, j]
         return []
+
+method 2:
+class Solution: hashtable
+    def twoSum(self,num:List[int],target:int) ->List
+      hashtable = dict() #初始化一个空的哈希表（字典），用来记录我们已经遍历过的数字及其索引。
+      for i,num in enumerate(nums):   #用 enumerate 同时遍历索引 i 和当前数字 num。
+          if target - num in hashtable:
+                return [hashtable[target-num],i]
+          hashtable [nums[i]] =i #如果没找到，就把当前数字和它的索引记录到哈希表中，供后面的数字查找
+                                 #把当前数字 nums[i] 作为“键（key）”，它的下标 i 作为“值（value）”，存进字典 hashtable里
+                                 #{2: 0, 
+                                 # 7: 1，
+                                 # 11:2，
+                                 # 15：3}
+      return []
+
+
