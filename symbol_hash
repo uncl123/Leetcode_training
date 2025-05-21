@@ -17,12 +17,12 @@
 输入: strs = ["a"]
 输出: [["a"]]
 
-
+from collection import defaultdict
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         anagrams = defaultdict(list)
         for word in strs:
-            sorted_word = tuples(orted(s))） # 把 s 排序，作为哈希表的 key
+            sorted_word = tuples(sorted(word))） # 把 word 排序，作为哈希表的 key
             anagrams[sorted_word].append(word)  # 排序后相同的字符串分到同一组
         return list(anagrams.values())  # 哈希表的 value 保存分组后的结果
