@@ -7,7 +7,7 @@ class Solution:
         nums.sort()  # 第一步：对数组排序，方便后续去重和使用双指针
         res = []  # 存放最终结果的列表
 
-        for i in range(len(nums) - 2):  # 最多只需遍历到倒数第三个数
+        for i in range(len(nums) - 2):  # 最多只需遍历到倒数第2个数
             # 跳过重复的起始元素，避免结果重复
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
