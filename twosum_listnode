@@ -1,0 +1,52 @@
+ListNode 是 “链表节点”的类定义，每一个 ListNode 对象就是一个链表里的节点，它包含：
+val: 存储的值（一个整数）
+next: 指向下一个节点的指针（或者是 None，表示链表结尾）
+
+在 LeetCode 中默认定义如下（你不用自己写）
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val      # 当前节点的值
+        self.next = next    # 指向下一个节点
+
+
+给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
+请你将两个数相加，并以相同形式返回一个表示和的链表。
+你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+例：
+输入：l1 = [2,4,3], l2 = [5,6,4]
+输出：[7,0,8]
+解释：342 + 465 = 807.
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        dummy = ListNode(0，none)      # 哨兵节点，便于最后返回 # 永远指向开头（不能动！）
+        curr = dummy            # 指向当前操作节点 curr 是一个“构建指针” # 当前构造节点（可以动）
+        carry = 0               # 初始化进位值为 0
+
+        while l1 or l2 or carry:
+            # 当前位的两个数（如果链表已结束就视为0）
+            val1 = l1.val if l1 else 0  #if l1 else 0判断 l1 这个变量是否为 None（即是否还有节点）
+            val2 = l2.val if l2 else 0  ##if l2 else 0判断 l2 这个变量是否为 None（即是否还有节点）
+            total = val1 + val2 + carry   # 当前总和
+            carry = total // 10           # 计算进位
+            curr.next = ListNode(total % 10)  # 取个位数建新节点
+            curr = curr.next              # 移动指针
+
+            # 向后移动两个输入链表（注意边界检查）
+            if l1: l1 = l1.next
+            if l2: l2 = l2.next
+            #所以加 if l2: 的作用是：
+            #“如果 l2 不是空（None），我们才往后移动。”
+            #这是为了防止访问 None 的属性，避免崩溃。
+        return dummy.next #返回整个链表
+
+类比：链表就像火车
+dummy 是月台，不上车
+
+dummy.next 是火车头
+
+每节车厢（节点）都知道下一个车厢的位置（.next）
+
+你只需要抓住第一节车厢（dummy.next），就能顺着找到整列火车。
+
+
