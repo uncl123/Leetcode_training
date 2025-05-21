@@ -1,0 +1,41 @@
+给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 
+满足 i != j、i != k 且 j != k ，
+同时还满足 nums[i] + nums[j] + nums[k] == 0 。请你返回所有和为 0 且不重复的三元组。
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()  # 第一步：对数组排序，方便后续去重和使用双指针
+        res = []  # 存放最终结果的列表
+
+        for i in range(len(nums) - 2):  # 最多只需遍历到倒数第三个数
+            # 跳过重复的起始元素，避免结果重复
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+
+            left = i + 1           # 左指针从 i 后面一个位置开始
+            right = len(nums) - 1  # 右指针从数组最后一个位置开始
+
+            while left < right:  # 开始双指针查找
+                total = nums[i] + nums[left] + nums[right]  # 当前三数之和
+
+                if total < 0:
+                    left += 1  # 和太小了，左指针右移尝试更大数
+                elif total > 0:
+                    right -= 1  # 和太大了，右指针左移尝试更小数
+                else:
+                    # 找到了满足条件的三元组
+                    res.append([nums[i], nums[left], nums[right]])
+
+                    # 跳过重复的 left 元素
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+
+                    # 跳过重复的 right 元素
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+
+                    # 移动指针，进入下一轮查找
+                    left += 1
+                    right -= 1
+
+        return res  # 返回所有符合条件的不重复三元组
