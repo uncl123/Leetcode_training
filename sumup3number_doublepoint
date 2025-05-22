@@ -9,7 +9,7 @@ class Solution:
 
         for i in range(len(nums) - 2):  # 最多只需遍历到倒数第2个数
             # 跳过重复的起始元素，避免结果重复
-            if i > 0 and nums[i] == nums[i - 1]:
+            if i > 0 and nums[i] == nums[i - 1]: #去重
                 continue
 
             left = i + 1           # 左指针从 i 后面一个位置开始
