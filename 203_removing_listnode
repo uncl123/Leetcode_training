@@ -7,7 +7,7 @@
 #         self.next = next
 class Solution:
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
-        dummy_head=ListNode(next=head)
+        dummy_head=ListNode(next=head) #定义头节点
 
         current=dummy_head
         while current.next:
