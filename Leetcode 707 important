@@ -58,4 +58,13 @@ class MyLinkedList:
           for i in range(index):
               current = current.next      #current目前指向第index-1个节点
           current.next= current.next.next #右侧current.next.next为指向第index+1个节点，把这个指向的节点赋值给左边第index的节点
-                                          
+                                          #经典删除节点操作，跳过节点，current删除节点前一个节点，用current.next=current.next.next这个操作来删除节点
+          self.size -=1
+
+# Your MyLinkedList object will be instantiated and called as such:
+# obj = MyLinkedList()
+# param_1 = obj.get(index)
+# obj.addAtHead(val)
+# obj.addAtTail(val)
+# obj.addAtIndex(index,val)
+# obj.deleteAtIndex(index)
