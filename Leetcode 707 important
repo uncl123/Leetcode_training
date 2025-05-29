@@ -1,0 +1,61 @@
+Leetcode 707 important
+单链表方法：
+#先定义单链表的节点,初始化val和next因为单节点只有next指针，另外这种类都是需要定义一个self的
+class Listnode:
+      def __init__(self,val=0,next=none):
+          self.val = val
+          self.next = next
+
+#定义单链表：
+class MyLinkedList:
+      def __init__(self)
+          self.dummy_head = Listnode（）
+          #创建了一个虚拟头节点（dummy head），初始状态不存储任何有效数据，仅作为链表的起始位置，目的是方便链表的插入与删除操作。
+          self.size=0
+
+      def get(self, index: int) —> int:   #定义第一个功能，自变量index，输出一个int整形的val
+          if index< 0 or index >= self.size: #我们得知道的是从第0个节点开始的，index可以是等于0的，最后一个节点是size-1。
+              return -1
+
+          current = self.dummy_head.next  #创建一个指针current来修改链表而不是直接修改链表，这个指针指向虚拟头节点后面一个节点也就是头节点
+          for i in range(index):   #python里面的range是左闭右开的，右边是取不到的，
+                                   #例如index是3的话，range(index)实际上等于[0,1,2],也就是循环3次
+                                   #这个过程中，i从0到1到2然后结束
+              current = current.next
+          #这个部分可以用while循环来替代的，比如说while(index)：      #这里的话while是减到0就停止运行了，从3到2到1到0，循环也是3次
+          #                                    current= current.next
+          #                                    index--
+      
+          return current.val
+      def addAtHead(self, val: int) -> None:  #是在创建一个新节点，它的值为 val，并且它的 next 指向当前原来的第一个节点
+          self.dummy_head.next = ListNode(val,self.dummy_head.next) 
+          #（）里面的self.dummt_head.next是原来链表中的头节点，也是新加节点的指向，ListNode定义在最上方
+          #上面 self.dummy_head.next指代不一样是因为赋值的时间不一样；等号右边先开始赋值，举一个例子（99， self.dummy_head.next）
+          #ListNode(99, self.dummy_head.next)这里的操作是将一个值为99的节点指向我们原来的头节点
+          #然后执行等号左边部分，也就是把虚拟头节点指向我们新加入的这个节点，所以你会发现 self.dummy_head.next这个指代有不一样
+          self.size += 1
+
+      def addAtTail(self, val:int)  -> None:
+          current = self.dummy_head.next     #在链表末加一个节点，这个值为val的节点指向none，这里我们思考的问题是该怎么指向这个加入的节点
+          while current.next:  #只要当前节点的 next 不是 None，就继续往下走，这个条件判断是重点
+                      current = current.next
+          current.next= Listnode(val)
+          self.size +=1
+      def addAtIndex(self,index:int,val:int) —>
+          if index<0 or index >self.size:
+              return
+          current = self.dummy_head
+          for i in range(index):  #(index)是多少就循环多少次，这里current一开始是虚拟头节点，第一次循环指向的是头节点也就是节点0，
+                                  #循环index次，所以最后也就是current指向的是第index-1个节点
+                  current = current.next
+          current.next = ListNode(val,current.next)#同理，这里先给右侧赋值，一个值为val节点指向第index个节点；
+                                                   #接着我们给左边赋值：这也就意味着current这个指针指向我们新加入的节点
+          self.size+=1
+      def deleteAtIndex(self,index: int) ->
+          if index<0 or index>=self.size:
+              return
+          current =self.dummy_head
+          for i in range(index):
+              current = current.next      #current目前指向第index-1个节点
+          current.next= current.next.next #右侧current.next.next为指向第index+1个节点，把这个指向的节点赋值给左边第index的节点
+                                          
