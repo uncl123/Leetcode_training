@@ -1,0 +1,64 @@
+在一条长度为 N 的道路上，路口编号从0到 N - 1。每个路口i都安装了一个基站，并统计了当前接入人数为 crossroadsi。
+每个基站的信号覆盖范围为前后各k个路口，即第讠号基站覆盖区间为[i - k,i+ k](边界越界取到0或N - 1)。
+行驶在第i号路段(即在路口i和i十1 之间)时，手机可连接所有覆盖该路段的基站，用户应选择接入人数最少的基站。
+
+输入描述
+输入为两行
+第一行长度为N的整数数组crossroads，数组元素以空格分隔，其中crossroads[i]表示i号路口基站的当前接入人数。1<= crossroads,length数组长度<= 10^5，0 <crossroads<=10^2
+第二行为基站覆盖范围k，1<=k<= crossroads.length,非法输入返回-1
+输出描述
+返回一个数组ret，reti表示i路段上最佳基站的编号，数组元素之间以空格分隔。例如0号路口到1号路口的路段，为0号路段，其最佳基站用ret[0]表示。
+输入：
+3 5 8 7 6 7 4
+2
+输出：
+0 0 1 4 6 6
+
+
+
+from collections import deque
+import sys
+
+def best_station(crossroads, k):
+    n = len(crossroads)
+    if n < 2 or k < 1 or k > n:
+        return None  # 非法输入
+    ret = [0] * (n-1)
+    dq = deque()
+
+    # 初始化第0号路段
+    R0 = min(n-1, k)
+    for i in range(R0+1):
+        while dq and crossroads[i] <= crossroads[dq[-1]]:
+            dq.pop()
+        dq.append(i)
+    ret[0] = dq[0]
+
+    # 滑动其余路段
+    for i in range(1, n-1):
+        Li = max(0, i+1-k)
+        Ri = min(n-1, i+k)
+        if Ri > R0:
+            idx = Ri
+            while dq and crossroads[idx] <= crossroads[dq[-1]]:
+                dq.pop()
+            dq.append(idx)
+            R0 = Ri
+        while dq and dq[0] < Li:
+            dq.popleft()
+        ret[i] = dq[0]
+    return ret
+
+if __name__ == "__main__":
+    data = sys.stdin.readline().strip().split()
+    crossroads = list(map(int, data))
+    try:
+        k = int(sys.stdin.readline().strip())
+    except:
+        print(-1)
+        sys.exit(0)
+    res = best_station(crossroads, k)
+    if res is None:
+        print(-1)
+    else:
+        print(" ".join(map(str, res)))
