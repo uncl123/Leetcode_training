@@ -24,20 +24,20 @@ def best_station(crossroads, k):
     if n < 2 or k < 1 or k > n:
         return None  # 非法输入
     ret = [0] * (n-1)
-    dq = deque()
+    dq = deque()    #建立一个递增数列来存crossroad的index，这个递增指的是crossroad[i]的值在这个数列里面是递增的，然后dq[]里面记录的是编号i.
 
     # 初始化第0号路段
     R0 = min(n-1, k)
     for i in range(R0+1):
-        while dq and crossroads[i] <= crossroads[dq[-1]]:
+        while dq and crossroads[i] <= crossroads[dq[-1]]:  #初始化R0只需要处理右边界
             dq.pop()
         dq.append(i)
     ret[0] = dq[0]
 
     # 滑动其余路段
     for i in range(1, n-1):
-        Li = max(0, i+1-k)
-        Ri = min(n-1, i+k)
+        Li = max(0, i+1-k)  #边界处理，这里的也是编号i
+        Ri = min(n-1, i+k)  #边界处理，这里的也是编号i
         if Ri > R0:
             idx = Ri
             while dq and crossroads[idx] <= crossroads[dq[-1]]:
