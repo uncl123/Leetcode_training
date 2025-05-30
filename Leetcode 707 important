@@ -41,8 +41,8 @@ class MyLinkedList:
                       current = current.next
           current.next= Listnode(val)
           self.size +=1
-      def addAtIndex(self,index:int,val:int) —>
-          if index<0 or index >self.size:
+      def addAtIndex(self,index:int,val:int) —> None:
+          if index<0 or index >self.size:  #这里合法的边界是[0,size],这里可以取size值是因为我们可以在尾部原本没有的节点位置加上节点相当于addAtTaill
               return
           current = self.dummy_head
           for i in range(index):  #(index)是多少就循环多少次，这里current一开始是虚拟头节点，第一次循环指向的是头节点也就是节点0，
@@ -51,8 +51,9 @@ class MyLinkedList:
           current.next = ListNode(val,current.next)#同理，这里先给右侧赋值，一个值为val节点指向第index个节点；
                                                    #接着我们给左边赋值：这也就意味着current这个指针指向我们新加入的节点
           self.size+=1
-      def deleteAtIndex(self,index: int) ->
-          if index<0 or index>=self.size:
+      def deleteAtIndex(self,index: int) ->  None:
+          if index<0 or index>=self.size:  #这里合法的边界是[0,size-1]是因为删除节点需要本来就有节点，
+                                           #我们这里原本的节点只有size个，节点是从0开始的，所以size只能取到size-1
               return
           current =self.dummy_head
           for i in range(index):
