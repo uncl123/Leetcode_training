@@ -12,3 +12,25 @@ input().split() 的返回值是一个 列表（list），列表中的每个元�
 n, target= map(int,input().split()
 像下面这样我们需要将输入为一个列表就需要在map()外面套一层list
 nums= list(map(int,input().split()))
+
+
+
+class Solution:
+    def twoSum(self,nums,target):
+        hashtable={}
+        for i,num in enumerate(nums):
+            if target-num in hashtable:
+                return[hashtable[target-num],i]
+            else:
+                 hashtable[num]=i
+        return []
+
+n, target = map(int, input().split())
+nums = list(map(int, input().split()))
+ 
+# 创建 Solution 类的实例并调用 two_sum 方法 
+solution = Solution()
+result = solution.twoSum(nums,  target)
+ 
+# 输出结果 
+print(result[0], result[1])
