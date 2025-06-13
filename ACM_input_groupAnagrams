@@ -7,7 +7,7 @@ class Solution:
       for s in strs:
           key="".join(sorted(s))
           mp[key].append(s)
-    return list(mp.values())   #这里我们主要要掌握我们输出的是什么
+    return list(mp.values())   #这里我们主要要掌握我们输出的是什么   mp.vlaue()这里 加 () 就是调用这个方法，执行它并获取返回值
 
 
 if___name___ = "___main___"   #主函数这个形式我们要记住，在ACM输入输出模式下经常会用到
