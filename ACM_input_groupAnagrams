@@ -13,15 +13,15 @@ class Solution:
 if___name___ = "___main___"   #主函数这个形式我们要记住，在ACM输入输出模式下经常会用到
     solution=Solution()
     n=int(input())
-    strs=input().split()
-    ans =solution.groupAnagrams(strs)
+    strs=input().split()  这里我们得到也是一个字符串列表
+    ans =solution.groupAnagrams(strs)  ans这里我们得到的是一个列表里面列表再里面字符串，所以下面要依次解
     for group in ans:
         print(" ".join(group))
 
 
+字符串列表的作用是用来解决循环的
 
-
-我们要学会这个语句  "".join()
+我们要学会这个语句  "".join()  通熟来讲就是解字符串列表为字符串
 Python 中的 " ".join(...) 是字符串（str）类型的一个方法，用来将一个可迭代对象（如列表、元组、字符序列等）里的所有元素拼接成一个新的字符串，并在每两个元素之间插入调用该方法的字符串（这里是一个空格 " "）作为分隔符。
 
 sorted(s) 把字符串拆成字符列表并按字母排序，得到 ['a','e','t']。
