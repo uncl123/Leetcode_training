@@ -1,0 +1,31 @@
+ACM mode 异构词 
+from collections import defaultdict
+
+class Solution:
+    def groupAnagrams(self,strs):
+      mp=defaultdict(list)
+      for s in strs:
+          key="".join(sorted(s))
+          mp[key].append(s)
+    return list(mp.values())   #这里我们主要要掌握我们输出的是什么
+
+
+if___name___ = "___main___"   #主函数这个形式我们要记住，在ACM输入输出模式下经常会用到
+    solution=Solution()
+    n=int(input())
+    strs=input().split()
+    ans =solution.groupAnagrams(strs)
+    for group in ans:
+        print(" ".join(group))
+
+
+
+
+我们要学会这个语句  "".join()
+Python 中的 " ".join(...) 是字符串（str）类型的一个方法，用来将一个可迭代对象（如列表、元组、字符序列等）里的所有元素拼接成一个新的字符串，并在每两个元素之间插入调用该方法的字符串（这里是一个空格 " "）作为分隔符。
+
+sorted(s) 把字符串拆成字符列表并按字母排序，得到 ['a','e','t']。
+再用空格 " " 把它们拼成 "a e t"，这个有序又唯一的字符串就可以用作字典分组的 key
+
+group 是一个由同组异位词组成的字符串列表，比如 ["eat","tea","ate"]。
+" ".join(group) 就会把它们拼成一行可读的 "eat tea ate"，中间以空格分隔，输出更整洁。
