@@ -1,0 +1,22 @@
+字符串切片式倒转：
+
+class Solution:
+    def reverseStr(self, s: str, k: int) -> str:
+        def reverse_substring(text):
+            left=0
+            right=len(text)-1
+            while right>left:
+                p=text[left]
+                text[left]=text[right]
+                text[right]=p
+                left+=1
+                right-=1
+            return text
+        res =list(s) #这里将字符串转化为字符串列表
+
+        for cur in range(0,len(s),2*k):
+            res[cur:cur+k]=reverse_substring(res[cur:cur+k]) #切片操作返回的也是列表
+        
+        return''.join(res)。#复习一下将字符串列表转字符串的操作
+        
+        #res[cur: cur + k]：切片从cur切到cur+k
