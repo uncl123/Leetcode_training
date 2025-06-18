@@ -19,4 +19,4 @@ class Solution:
         
         return''.join(res)。#复习一下将字符串列表转字符串的操作
         
-        #res[cur: cur + k]：切片从cur切到cur+k
+        #res[cur: cur + k]：切片从cur切到cur+k,python里面的切片操作是左闭右开的，所以一共是从cur+0到cur+k-1一共前k个数字
