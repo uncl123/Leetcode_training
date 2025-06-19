@@ -1,0 +1,20 @@
+这题主要掌握python的切片操作
+
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        # 特殊情况：空 needle 要返回 0
+        if needle == "":
+            return 0
+
+        n, m = len(haystack), len(needle)
+        # 如果 needle 长度大于 haystack，直接不可能匹配
+        if m > n:
+            return -1
+
+        # 在 haystack 中每个可能起点试一次
+        for i in range(n - m + 1):
+            # 检查 haystack[i:i+m] 是否等于 needle
+            # 这里用切片比较，底层也是 O(m)
+            if haystack[i:i+m] == needle:
+                return i
+        return -1
