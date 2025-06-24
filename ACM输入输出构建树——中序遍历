@@ -1,0 +1,33 @@
+# 定义二叉树节点类
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val= val
+        self.left= left
+        self.right=right
+
+
+#用输入的数组构建树，这个很重要，掌握这个先
+def build_tree(level_order):
+    # 将层次遍历结果构建成二叉树
+    if not level_order or level_order[0] == 'null':
+        return None
+    
+    nodes = []
+    index = 0
+    root = TreeNode(int(level_order[index])  #int把字符串转为整形
+    nodes.append(root)
+    index += 1
+    
+    while index < len(level_order):
+        node_val = level_order[index]
+        if node_val != 'null':
+            node = TreeNode(int(node_val)) #int把字符串转为整形
+            parent = nodes[(index - 1) // 2] #完全二叉树父节点对于子节点在数组中的位置
+            if index % 2 == 1:
+                parent.left = node
+            else:
+                parent.right = node
+            nodes.append(node)
+        index += 1
+    
+    return root
